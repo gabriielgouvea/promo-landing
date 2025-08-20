@@ -1,0 +1,185 @@
+/* ====== Variáveis de tema ====== */
+:root {
+  /* Cor principal da marca */
+  --brand-primary: #8c52ff;
+
+  /* Fundo degradê vibrante */
+  --bg-start: #8c52ff;
+  --bg-mid: #7a3ff7;
+  --bg-end: #3b1fa4;
+
+  /* Texto */
+  --fg: #fff;
+
+  /* Botão WhatsApp VERDE */
+  --wa: #25d366;
+  --wa-ink: #fff;
+  --wa-glow: rgba(37, 211, 102, .55);
+
+  /* Sombras */
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, .08);
+  --shadow-card: 0 10px 26px rgba(0, 0, 0, .18);
+  --shadow-card-strong: 0 14px 32px rgba(0, 0, 0, .22);
+}
+
+/* ====== Reset básico ====== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+}
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--fg);
+
+  /* Fundo degradê + halo */
+  background:
+    radial-gradient(800px 600px at 50% -200px,
+      color-mix(in oklab, var(--brand-primary) 50%, transparent) 0%,
+      transparent 70%),
+    linear-gradient(160deg, var(--bg-start) 0%, var(--bg-mid) 40%, var(--bg-end) 100%);
+  
+  display: grid;
+  place-items: center;
+}
+
+/* ====== Container ====== */
+#app {
+  position: relative;
+  width: min(92vw, 520px);
+  text-align: center;
+  padding: 56px 20px;
+  margin-top: 4vh;
+}
+
+/* ====== Logo ====== */
+.logo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  margin: 0 auto 22px;
+  display: block;
+}
+
+/* ====== Selo “verificado” ====== */
+.badge-verified {
+  position: absolute;
+  top: 58px; /* SUBIMOS MAIS para alinhar melhor na borda superior */
+  left: calc(50% + 44px);
+  transform: translateX(-50%);
+  background: #1da1f2;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 16px;
+  box-shadow: 0 4px 14px rgba(29,161,242,.4);
+  border: 2px solid #fff;
+}
+
+/* Ajuste proporcional para telas menores */
+@media (max-width: 360px) {
+  .badge-verified {
+    top: 50px; /* sobe um pouco mais no mobile também */
+    left: calc(50% + 38px);
+  }
+}
+
+/* ====== Título ====== */
+.headline {
+  margin: 0 0 26px;
+  font-size: clamp(36px, 7vw, 52px);
+  font-weight: 900;
+  letter-spacing: .02em;
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ====== Botão WhatsApp ====== */
+.wa-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  fill: currentColor;
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  background: var(--wa);
+  color: var(--wa-ink);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .2px;
+
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 0 var(--wa-glow);
+  transform: translateY(0) scale(1);
+  transition: transform .18s ease, box-shadow .2s ease;
+
+  /* Animação “respirar” com glow */
+  animation: breath 2.6s ease-in-out infinite;
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    var(--shadow-card-strong),
+    0 0 26px 8px var(--wa-glow);
+  outline: none;
+}
+
+/* “Respirar” (pulse suave) */
+@keyframes breath {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--shadow-card), 0 0 0 0 var(--wa-glow);
+  }
+  50% {
+    transform: translateY(0) scale(1.03);
+    box-shadow: var(--shadow-card), 0 0 22px 6px var(--wa-glow);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--shadow-card), 0 0 0 0 var(--wa-glow);
+  }
+}
+
+/* ====== Prova social ====== */
+.social-proof {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+/* ====== Acessibilidade: reduz movimento ====== */
+@media (prefers-reduced-motion: reduce) {
+  .btn-whatsapp { animation: none; }
+  .btn-whatsapp,
+  .btn-whatsapp:hover,
+  .btn-whatsapp:focus-visible { transition: none; }
+}
+
+/* ====== Responsividade ====== */
+@media (max-width: 360px) {
+  .logo { width: 104px; height: 104px; }
+  .badge-verified {
+    top: 62px; /* sobe proporcionalmente em telas menores */
+    left: calc(50% + 38px);
+  }
+}
